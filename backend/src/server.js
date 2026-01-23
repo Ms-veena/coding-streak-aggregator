@@ -13,6 +13,15 @@ console.log("fetchCodeforcesData:", fetchCodeforcesData);
 const app = express();
 
 // middleware
+app.get("/__debug", (req, res) => {
+  res.json({
+    message: "DEBUG ROUTE HIT",
+    routes: app._router.stack
+      .filter(r => r.route)
+      .map(r => Object.keys(r.route.methods)[0].toUpperCase() + " " + r.route.path),
+  });
+});
+
 //app.use(cors({ origin: "*" }));
 
 app.use(

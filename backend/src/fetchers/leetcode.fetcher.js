@@ -42,7 +42,7 @@ const fetchLeetCodeData = async (username) => {
     const user = result.data.matchedUser;
 
     return {
-      handle: user.username,
+      handle: username,
       totalSolved: user.submitStatsGlobal.acSubmissionNum[0].count,
       ranking: user.profile?.ranking || null,
     };

@@ -13,9 +13,14 @@ console.log("fetchCodeforcesData:", fetchCodeforcesData);
 const app = express();
 
 // middleware
-app.use(cors({ origin: "*" }));
+//app.use(cors({ origin: "*" }));
 
-app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+  })
+);
 
 // test route
 app.get("/health", (req, res) => {
@@ -87,7 +92,10 @@ app.get("/leaderboard", async (req, res) => {
 app.get("/refresh/combined/:cfHandle/:lcHandle", async (req, res) => {
   try {
     const cfData = await fetchCodeforcesData(req.params.cfHandle);
-    const lcData = await fetchLeetCodeData(req.params.lcHandle);
+    const lcData = {
+  totalSolved: 0,
+  ranking: null,
+};
 
     const cfStreak = calculateStreak(cfData.submissions);
 

@@ -8,6 +8,7 @@ function App() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+
   const refreshProfile = async () => {
     if (!cfHandle || !lcHandle) {
       setError("Please enter both Codeforces and LeetCode handles");
@@ -21,12 +22,12 @@ function App() {
 
       // 1. Refresh combined profile
       await fetch(
-        `https://coding-streak-backend.onrender.com/refresh/combined/${cfHandle}/${lcHandle}`
+        `https://coding-streak-aggregator.onrender.com/refresh/combined/${cfHandle}/${lcHandle}`
       );
 
       // 2. Fetch profile
       const profileRes = await fetch(
-        `https://coding-streak-backend.onrender.com/profile/${cfHandle}`
+        `https://coding-streak-aggregator.onrender.com/profile/${cfHandle}`
       );
       const profileJson = await profileRes.json();
 
@@ -37,7 +38,7 @@ function App() {
       setData(profileJson);
 
       // 3. Fetch leaderboard
-      const lbRes = await fetch(`https://coding-streak-backend.onrender.com/leaderboard`);
+      const lbRes = await fetch(`https://coding-streak-aggregator.onrender.com/leaderboard`);
       const lbJson = await lbRes.json();
       setLeaderboard(lbJson);
     } catch (err) {

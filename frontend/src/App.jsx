@@ -21,12 +21,12 @@ function App() {
 
       // 1. Refresh combined profile
       await fetch(
-        `http://localhost:5000/refresh/combined/${cfHandle}/${lcHandle}`
+        `https://coding-streak-backend.onrender.com/refresh/combined/${cfHandle}/${lcHandle}`
       );
 
       // 2. Fetch profile
       const profileRes = await fetch(
-        `http://localhost:5000/profile/${cfHandle}`
+        `https://coding-streak-backend.onrender.com/profile/${cfHandle}`
       );
       const profileJson = await profileRes.json();
 
@@ -37,7 +37,7 @@ function App() {
       setData(profileJson);
 
       // 3. Fetch leaderboard
-      const lbRes = await fetch(`http://localhost:5000/leaderboard`);
+      const lbRes = await fetch(`https://coding-streak-backend.onrender.com/leaderboard`);
       const lbJson = await lbRes.json();
       setLeaderboard(lbJson);
     } catch (err) {

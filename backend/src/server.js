@@ -13,14 +13,6 @@ console.log("fetchCodeforcesData:", fetchCodeforcesData);
 const app = express();
 
 // middleware
-app.get("/__debug", (req, res) => {
-  res.json({
-    message: "DEBUG ROUTE HIT",
-    file: __filename,
-    cwd: process.cwd(),
-  });
-});
-
 
 //app.use(cors({ origin: "*" }));
 
@@ -114,11 +106,11 @@ app.get("/refresh/combined/:cfHandle/:lcHandle", async (req, res) => {
     const profile = await Profile.findOneAndUpdate(
       {
         platform: "combined",
-        handle: `${cfData.handle}|${lcData.handle}`,
+        handle: `${cfData.handle}|${req.params.lcHandle}`,
       },
       {
         platform: "combined",
-        handle: `${cfData.handle}|${lcData.handle}`,
+        handle: `${cfData.handle}|${req.params.lcHandle}`,
         streak: cfStreak,
         score: cfStreak,
         leetcode: {
